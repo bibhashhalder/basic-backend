@@ -3,10 +3,9 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 
-
 export default [
   {
-    ignores: ["node_modules/**",".env/**", "dist/**"],
+    ignores: ["node_modules/**", ".env/**", "dist/**"],
   },
   {
     files: ["**/*.ts"],
