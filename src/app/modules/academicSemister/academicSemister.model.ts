@@ -22,7 +22,7 @@ const academicSemisterSchema =new Schema<TAcademicSemister>({
         enum:academicSemisterCodeSchema
     },
     year:{
-        type:Date,
+        type:String,
         required:true
     },
     startMonth:{
@@ -40,4 +40,14 @@ const academicSemisterSchema =new Schema<TAcademicSemister>({
     timestamps:true
 }
 );
+academicSemisterSchema.pre('save', async function(next){
+    const isSemisterExist =await academicSemister.findOne({
+        year:this.year,
+        name:this.name
+    })
+    if(isSemisterExist){
+        throw new Error('Semister already exist')
+    }
+    next()
+})
 export const academicSemister =model<TAcademicSemister>('AcademicSemister',academicSemisterSchema);
